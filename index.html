@@ -3,725 +3,542 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quatro Art DNA</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>קוד שיגור - סודות החלל</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rubik:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #eef0f4;
-  --surface: #ffffff;
-  --panel: #f8f9fb;
-  --border: #e2e5eb;
-  --text: #16181d;
-  --text2: #5a6070;
-  --text3: #9ba3b0;
-  --accent: #4f6ef7;
-  --accent2: #7c5af7;
-  --green: #22c55e;
-  --gold: #f0b429;
-  --font: 'Plus Jakarta Sans', sans-serif;
-  --card-w: 95px;
-  --card-h: 125px;
-  --card-ratio: calc(95 / 125);
-  --radius: 10px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.13);
+:root{
+  --purple-dark:#580670;--teal-deep:#036880;--light-blue:#eafbff;
+  --lilac:#864f9b;--bg:#03020a;--success:#00ff88;--error:#ff4466;--code-color:#00e5ff;
 }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{overflow-x:hidden;}
+body{background:var(--bg);color:var(--light-blue);font-family:'Rubik',sans-serif;min-height:100vh;overflow-x:hidden;direction:rtl;font-size:17px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(88,6,112,0.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(3,104,128,0.12) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.stars-bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.star-dot{position:absolute;background:white;border-radius:50%;animation:twinkle var(--d) ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.15}50%{opacity:0.9}}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  direction: rtl;
-  min-width: 960px;
-}
-.main-wrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-height: 0;
-}
+/* HEADER */
+.header-title{background:linear-gradient(135deg,#1a0025 0%,#03404d 60%,#580670 100%);padding:28px 20px 22px;text-align:center;border-bottom:2px solid rgba(77,217,240,0.3);position:relative;overflow:hidden;z-index:10;}
+.header-title::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,229,255,0.08) 0%,transparent 70%);}
+.mission-label{font-family:'Orbitron',monospace;font-size:13px;letter-spacing:5px;color:#4dd9f0;text-transform:uppercase;margin-bottom:8px;text-shadow:0 0 10px rgba(77,217,240,0.4);}
+.mission-name{font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#eafbff;text-shadow:0 0 24px rgba(0,229,255,0.6);}
 
-/* ── HEADER ── */
-.hdr {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 0 28px;
-  height: 48px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  z-index: 10;
-}
-.logo {
-  font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px;
-  grid-column: 2;
-  white-space: nowrap;
-}
-.logo em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hdr-right {
-  display: flex; align-items: center; gap: 16px;
-  grid-column: 1;
-  justify-content: flex-start;
-  padding-right: 12%;
-}
-.progress-pill {
-  display: flex; align-items: center; gap: 8px;
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 20px; padding: 5px 14px;
-  font-size: 14px; font-weight: 600; color: var(--text2);
-}
-.progress-pill .num { font-size: 18px; font-weight: 800; color: var(--accent); }
-.btn-how {
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  color: #fff; border: none;
-  padding: 10px 24px; border-radius: 8px;
-  font-family: var(--font); font-size: 16px; font-weight: 700;
-  cursor: pointer; transition: opacity 0.2s, transform 0.1s;
-  box-shadow: 0 3px 12px rgba(79,110,247,0.35);
-}
-.btn-how:hover { opacity: 0.9; transform: translateY(-1px); }
+/* CONTAINER */
+.container{position:relative;z-index:10;max-width:680px;margin:0 auto;padding:0 16px 60px;}
 
-/* ── WAREHOUSE ── */
-.warehouse {
-  background: var(--surface);
-  border-bottom: 2px solid var(--border);
-  padding: 8px 20px;
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-height: 0;
-  max-height: 50vh;
-}
-.wh-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  color: var(--text3); text-transform: uppercase; margin-bottom: 8px;
-  flex-shrink: 0;
-}
-.wh-grid {
-  display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-auto-rows: auto;
-  gap: clamp(4px, 0.6vw, 10px);
-  flex: 1;
-  min-height: 0;
-  padding: 4px 12px;
-  overflow: hidden;
-  align-content: start;
-}
-.wh-grid .card {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: unset;
-}
-.wh-grid::-webkit-scrollbar { width: 3px; }
-.wh-grid::-webkit-scrollbar-thumb { background: #d0d5df; border-radius: 2px; }
+/* PROGRESS */
+.progress-bar{background:rgba(234,251,255,0.05);height:3px;border-radius:2px;margin-bottom:0;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple-dark),var(--teal-deep));border-radius:2px;transition:width 0.5s ease;}
 
-/* ── SERIES AREA ── */
-.series-area {
-  flex: 1 1 0;
-  overflow: hidden;
-  padding: 6px 20px 4px;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  max-height: 50vh;
+/* DATA BUTTON - wide, top of stage 2+3 */
+.data-btn-wide{
+  display:block;width:100%;padding:13px 20px;
+  background:rgba(3,104,128,0.35);border:1.5px solid rgba(77,217,240,0.55);
+  border-radius:11px;color:#4dd9f0;font-family:'Orbitron',monospace;
+  font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer;
+  text-align:center;margin:18px 0 16px;
+  box-shadow:0 0 14px rgba(77,217,240,0.15);transition:all 0.2s;
 }
-.series-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  color: var(--text3); text-transform: uppercase; margin-bottom: 8px;
-  flex-shrink: 0;
-}
-.series-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: clamp(4px, 0.8vw, 16px) clamp(6px, 1.2vw, 24px);
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-  align-items: center;
-  justify-items: center;
-}
-@media (max-width: 1100px) {
-  .series-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
-  body { min-width: 760px; }
-}
+.data-btn-wide:hover{background:rgba(3,104,128,0.6);}
 
-/* ── SERIES BOX ── */
-.ws {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  display: flex; flex-direction: row; gap: 3px;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.35s, box-shadow 0.35s;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  min-width: 0;
-  padding: 4px;
-}
-.ws.complete {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 2px rgba(240,180,41,0.25), var(--shadow-lg);
-}
-.ws-num {
-  font-size: 9px; font-weight: 700; color: var(--text3);
-  writing-mode: vertical-rl; letter-spacing: 1px; min-width: 10px;
-}
+/* DATA MODAL */
+.data-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:500;display:none;align-items:center;justify-content:center;padding:16px;}
+.data-modal-overlay.open{display:flex;}
+.data-modal{background:#050d20;border:1px solid rgba(77,217,240,0.5);border-radius:16px;padding:24px;max-width:500px;width:100%;position:relative;overflow:hidden;}
+.data-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple-dark),var(--teal-deep),var(--lilac));}
+.data-modal-title{font-family:'Orbitron',monospace;color:#4dd9f0;font-size:15px;letter-spacing:3px;margin-bottom:20px;text-align:center;text-shadow:0 0 8px rgba(77,217,240,0.4);}
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{color:#4dd9f0;font-family:'Orbitron',monospace;font-size:12px;letter-spacing:2px;padding:7px 10px;border-bottom:1px solid rgba(77,217,240,0.3);text-align:right;}
+.data-table td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,0.05);color:#eafbff;font-family:'Share Tech Mono',monospace;font-size:14px;}
+.data-table td.code-cell{color:var(--code-color);font-family:'Orbitron',monospace;font-size:15px;letter-spacing:2px;text-shadow:0 0 6px rgba(0,229,255,0.4);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-close-btn{margin-top:20px;width:100%;padding:11px;background:linear-gradient(135deg,var(--purple-dark),var(--teal-deep));border:none;border-radius:10px;color:white;font-family:'Rubik',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
 
-/* ── SLOT ── */
-.slot {
-  width: var(--card-w);
-  aspect-ratio: 95 / 125;
-  height: auto;
-  flex-shrink: 0;
-  border: 1.5px dashed #ced3de;
-  border-radius: var(--radius);
-  background: #f3f5f9;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
-  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-}
-.slot.over {
-  border-color: var(--accent);
-  border-style: solid;
-  background: rgba(79,110,247,0.05);
-  box-shadow: 0 0 0 3px rgba(79,110,247,0.15);
-}
-.slot.has { border-style: solid; border-color: #c8cdd8; background: #fff; }
+/* STAGES */
+.stage{display:none;animation:fadeIn 0.6s ease forwards;}
+.stage.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── CARD ── */
-.card {
-  width: var(--card-w); height: var(--card-h);
-  border-radius: var(--radius);
-  border: 1.5px solid var(--border);
-  background: var(--surface);
-  cursor: grab; user-select: none; flex-shrink: 0;
-  overflow: hidden; position: relative;
-  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
-  box-shadow: var(--shadow);
-}
-.wh-grid .card {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 95 / 125;
-}
-.card:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: var(--shadow-lg);
-  border-color: #b0b8c9;
-  z-index: 20;
-}
-.card.dragging { opacity: 0.2; pointer-events: none; }
-.card.gone { display: none; }
+/* BRIEFING */
+.briefing{background:rgba(3,10,30,0.82);backdrop-filter:blur(6px);border:1px solid rgba(3,104,128,0.45);border-radius:14px;padding:22px;margin-bottom:18px;position:relative;overflow:hidden;}
+.briefing::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple-dark),var(--teal-deep),var(--lilac));}
 
-/* image */
-.c-img { width: 100%; height: 100%; overflow: hidden; }
-.c-img img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: grayscale(100%); transition: filter 1.3s ease;
-  pointer-events: none;
-}
+/* Typography hierarchy */
+/* L1: Stage header - Orbitron, teal, 13px, spaced */
+.t-stage-header{font-family:'Orbitron',monospace;font-size:13px;letter-spacing:3px;color:#4dd9f0;margin-bottom:14px;text-shadow:0 0 8px rgba(77,217,240,0.4);}
+/* L2: Body text */
+.t-body{font-size:17px;line-height:1.85;color:#eafbff;}
+.t-body strong{color:#00e5ff;font-weight:700;}
+/* L3: System confirm (green monospace) */
+.t-sys{font-family:'Share Tech Mono',monospace;font-size:15px;color:var(--success);margin-bottom:12px;text-shadow:0 0 8px rgba(0,255,136,0.35);line-height:1.5;}
+/* L4: Note/hint (italic, smaller) */
+.t-note{font-style:italic;color:rgba(234,251,255,0.8);margin-top:14px;font-size:15px;line-height:1.65;border-top:1px solid rgba(77,217,240,0.15);padding-top:12px;}
+.t-note strong,.t-note-label{color:#4dd9f0;font-style:normal;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:1px;}
+/* L5: Section title (Orbitron, uppercase) */
+.section-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;letter-spacing:2px;color:#4dd9f0;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;text-shadow:0 0 8px rgba(77,217,240,0.3);}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(77,217,240,0.4),transparent);}
+/* L6: Field label (Orbitron, teal, centered) */
+.t-field-label{font-family:'Orbitron',monospace;font-size:13px;color:#00e5ff;letter-spacing:3px;margin-bottom:8px;text-align:center;text-shadow:0 0 8px rgba(0,229,255,0.4);}
+/* ERROR */
+.t-error{display:none;color:var(--error);font-size:13px;font-style:italic;margin-top:6px;margin-bottom:4px;text-align:center;}
 
-/* info */
-/* info - framed painting style */
-.c-info {
-  width: 100%; height: 100%;
-  padding: 6px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: #faf8f3;
-  border: 3px solid #e8e0cc;
-  box-shadow: inset 0 0 0 2px #f0e8d0;
-  position: relative;
-}
-.c-info::before {
-  content: '';
-  position: absolute; inset: 2px;
-  border: 1px solid rgba(180,160,100,0.3);
-  pointer-events: none;
-}
-.c-info .badge {
-  font-size: clamp(7px, 0.55vw, 9px); font-weight: 700; letter-spacing: 2px;
-  color: #8a7040; text-transform: uppercase;
-  align-self: flex-start;
-}
-.c-info .ttl {
-  font-size: clamp(10px, 0.9vw, 14px); font-weight: 700; line-height: 1.3;
-  color: #1a1510; font-style: italic;
-  overflow: hidden; display: -webkit-box;
-  -webkit-line-clamp: 3; -webkit-box-orient: vertical;
-  text-align: center;
-}
-.c-info .art { font-size: clamp(9px, 0.78vw, 12px); font-weight: 700; color: #3a3020; line-height: 1.3; text-align: center; }
-.c-info .yr { font-size: clamp(9px, 0.78vw, 12px); color: #8a7050; font-weight: 600; text-align: center; }
+/* STARS INPUT */
+.stars-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px;}
+.star-number{font-size:15px;font-weight:700;color:#4dd9f0;margin-bottom:5px;display:flex;align-items:center;gap:8px;}
+.star-number .num{background:var(--teal-deep);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+.star-input-wrap{display:flex;gap:8px;align-items:center;}
+.star-input{flex:1;background:rgba(3,10,30,0.80);border:1px solid rgba(3,104,128,0.5);border-radius:8px;padding:13px 12px;color:#eafbff;font-family:'Share Tech Mono',monospace;font-size:16px;outline:none;transition:all 0.3s;direction:ltr;text-align:left;}
+.star-input:focus{border-color:#4dd9f0;box-shadow:0 0 14px rgba(77,217,240,0.25);}
+.star-input.success{border-color:var(--success);color:var(--success);font-weight:700;}
+.star-input.error{border-color:var(--error);}
+.confirm-btn{background:rgba(3,104,128,0.35);border:1px solid rgba(77,217,240,0.45);border-radius:8px;color:#4dd9f0;font-family:'Rubik',sans-serif;font-size:14px;font-weight:700;padding:0 14px;height:46px;cursor:pointer;white-space:nowrap;}
+.star-feedback{font-size:13px;margin-top:4px;min-height:16px;font-weight:600;direction:rtl;line-height:1.4;}
+.star-feedback.success{color:var(--success);}
+.star-feedback.error{color:var(--error);}
+.star-code-inline{font-size:16px;font-weight:700;color:var(--code-color);letter-spacing:3px;}
 
-/* palette */
-.c-pal { width: 100%; height: 100%; display: flex; flex-direction: column; }
-.pal-s { display: block; flex: var(--w); }
+/* POPUP */
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:400;display:none;align-items:center;justify-content:center;padding:16px;}
+.popup-overlay.open{display:flex;}
+.popup-box{background:linear-gradient(160deg,#050d20 0%,#030a18 100%);border:1px solid rgba(77,217,240,0.45);border-radius:18px;padding:26px;max-width:360px;width:100%;text-align:center;position:relative;overflow:hidden;}
+.popup-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--success),var(--code-color));}
+.popup-confirmed{font-family:'Share Tech Mono',monospace;font-size:14px;color:var(--success);margin-bottom:14px;letter-spacing:1px;}
+.popup-name{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:#eafbff;letter-spacing:3px;margin-bottom:14px;}
+.popup-data-title{font-family:'Orbitron',monospace;font-size:13px;color:#4dd9f0;letter-spacing:2px;margin-bottom:10px;text-align:right;text-shadow:0 0 6px rgba(77,217,240,0.4);}
+.popup-data-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;text-align:right;}
+.popup-data-label{font-family:'Share Tech Mono',monospace;font-size:12px;color:rgba(77,217,240,0.65);letter-spacing:1px;white-space:nowrap;padding-top:1px;}
+.popup-data-val{font-size:14px;color:#eafbff;line-height:1.55;flex:1;}
+.popup-code-sep{border:none;border-top:1px solid rgba(77,217,240,0.2);margin:14px 0;}
+.popup-code-label{font-family:'Share Tech Mono',monospace;font-size:12px;color:rgba(77,217,240,0.7);letter-spacing:2px;margin-bottom:6px;}
+.popup-code{font-family:'Orbitron',monospace;font-size:30px;color:#00e5ff;letter-spacing:6px;text-shadow:0 0 20px rgba(0,229,255,0.8);margin-bottom:18px;}
+.popup-close-btn{background:linear-gradient(135deg,var(--purple-dark),var(--teal-deep));border:none;color:white;border-radius:10px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;}
 
-/* hex - notebook style */
-.c-hex {
-  width: 100%; height: 100%;
-  padding: 8px 9px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: #fefdf8;
-  border-right: 3px solid #f08080;
-  position: relative;
-}
-.c-hex .badge {
-  font-size: clamp(7px, 0.55vw, 9px); font-weight: 700; letter-spacing: 2px;
-  color: #6080c0; text-transform: uppercase;
-  background: transparent;
-  line-height: 1.4;
-}
-.c-hex .hex-list { display: flex; flex-direction: column; gap: 0; }
-.c-hex .hc {
-  font-size: clamp(9px, 0.9vw, 13px); font-weight: 700;
-  color: #1a2a4a; letter-spacing: 0.5px;
-  font-family: 'Courier New', monospace;
-  line-height: 1.6;
-  direction: ltr;
-  text-align: left;
-  unicode-bidi: plaintext;
-}
+/* MAIN BTN */
+.btn{width:100%;padding:17px;background:linear-gradient(135deg,var(--purple-dark),var(--teal-deep));border:none;border-radius:12px;color:white;font-family:'Rubik',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(88,6,112,0.4);margin-top:10px;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(3,104,128,0.5);}
 
-/* ── GHOST ── */
-#ghost {
-  position: fixed; pointer-events: none; z-index: 9999;
-  display: none;
-  width: var(--card-w); height: var(--card-h);
-  border-radius: var(--radius); overflow: hidden;
-  border: 2px solid var(--accent);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
-  transform: rotate(3deg) scale(1.08);
-  transition: none;
-}
+/* CODE TEMPLATE */
+.code-template-wrap{display:flex;align-items:center;justify-content:center;gap:3px;margin:18px 0 6px;direction:ltr;}
+.code-box{display:inline-flex;align-items:center;justify-content:center;width:34px;height:44px;border:2px solid rgba(0,229,255,0.6);border-radius:6px;background:rgba(0,229,255,0.07);font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:#00e5ff;text-shadow:0 0 10px rgba(0,229,255,0.5);}
+.code-dot{font-family:'Orbitron',monospace;font-size:26px;font-weight:900;color:#fff;margin:0 1px;align-self:flex-end;padding-bottom:4px;}
+.code-space{width:18px;}
 
-/* ── MODAL ── */
-.overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(22,24,29,0.5); z-index: 800;
-  align-items: center; justify-content: center; backdrop-filter: blur(6px);
-}
-.overlay.on { display: flex; }
-.mbox {
-  background: var(--surface); border-radius: 18px;
-  padding: 36px; max-width: 520px; width: 92%;
-  direction: rtl; position: relative;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-}
-.mbox h2 { font-size: 22px; font-weight: 800; margin-bottom: 16px; }
-.mbox p { font-size: 15px; line-height: 1.85; color: var(--text2); }
-.mbox strong { color: var(--text); }
-.mbox .tip {
-  margin-top: 16px; background: rgba(79,110,247,0.07);
-  border-right: 3px solid var(--accent); border-radius: 8px;
-  padding: 12px 14px; font-size: 14px; color: var(--text2); line-height: 1.7;
-}
-.mclose {
-  position: absolute; top: 14px; left: 14px;
-  background: var(--panel); border: 1px solid var(--border);
-  width: 30px; height: 30px; border-radius: 50%;
-  cursor: pointer; font-size: 14px; color: var(--text2);
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}
-.mclose:hover { background: var(--border); color: var(--text); }
+/* CONTROL PANEL removed - replaced by data modal */
 
-/* ── WIN ── */
-.win {
-  display: none; position: fixed; inset: 0;
-  background: radial-gradient(ellipse at center, #1a1f3a 0%, #0d1020 100%);
-  z-index: 900; align-items: center; justify-content: center;
-  flex-direction: column; gap: 20px; text-align: center;
-}
-.win.on { display: flex; }
-.win-emoji { font-size: 56px; animation: bounce 0.6s ease infinite alternate; }
-@keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-12px)} }
-.win h1 { font-size: 52px; font-weight: 800; color: #fff; letter-spacing: -1px; }
-.win p { font-size: 16px; color: rgba(255,255,255,0.5); letter-spacing: 3px; font-weight: 600; }
-.win-btn {
-  margin-top: 8px; background: var(--gold);
-  color: #1a1a1a; border: none; padding: 13px 32px;
-  border-radius: 10px; font-family: var(--font);
-  font-size: 16px; font-weight: 800; cursor: pointer;
-}
+/* SEQ INPUT */
+.big-input{width:100%;background:rgba(3,10,30,0.80);border:2px solid rgba(3,104,128,0.5);border-radius:12px;padding:16px;color:#00e5ff;font-family:'Share Tech Mono',monospace;font-size:22px;font-weight:700;outline:none;text-align:center;direction:ltr;transition:all 0.3s;letter-spacing:3px;display:block;margin-bottom:8px;}
+.big-input:focus{border-color:#4dd9f0;box-shadow:0 0 20px rgba(77,217,240,0.25);}
+.big-input.success{border-color:var(--success);color:var(--success);box-shadow:0 0 20px rgba(0,255,136,0.3);}
+.seq-confirm-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--purple-dark),var(--teal-deep));border:none;border-radius:12px;color:white;font-family:'Rubik',sans-serif;font-size:17px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;margin-top:4px;}
 
-/* complete pulse */
-@keyframes completePulse {
-  0%,100%{box-shadow:0 0 0 2px rgba(240,180,41,0.3), var(--shadow)}
-  50%{box-shadow:0 0 0 5px rgba(240,180,41,0.15), var(--shadow-lg)}
-}
-.ws.complete { animation: completePulse 2s ease-in-out infinite; }
+/* VENUS INPUT */
+.venus-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(77,217,240,0.4);border-radius:10px;padding:14px 16px;color:#eafbff;font-family:'Share Tech Mono',monospace;font-size:16px;outline:none;margin-bottom:10px;direction:ltr;text-align:left;}
+.venus-input.success{border-color:var(--success);}
+.venus-input.error{border-color:var(--error);}
 
-/* img transition on slot */
-.slot .c-img img { filter: grayscale(100%); transition: filter 1.3s ease; }
+/* DEST INPUT */
+.dest-input{width:100%;background:rgba(3,10,30,0.80);border:2px solid rgba(3,104,128,0.5);border-radius:12px;padding:16px;color:#eafbff;font-family:'Rubik',sans-serif;font-size:17px;font-weight:600;outline:none;text-align:right;direction:rtl;transition:all 0.3s;display:block;}
+.dest-input:focus{border-color:#4dd9f0;box-shadow:0 0 20px rgba(77,217,240,0.25);}
+.dest-input.success{border-color:var(--success);box-shadow:0 0 20px rgba(0,255,136,0.3);}
+.dest-confirm-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--purple-dark),var(--teal-deep));border:none;border-radius:12px;color:white;font-family:'Rubik',sans-serif;font-size:17px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;margin-top:10px;}
+
+/* FINALE */
+.finale{text-align:center;padding:20px 0;}
+.finale-congrats{font-size:18px;line-height:2;color:#eafbff;margin-bottom:28px;}
+.finale-congrats strong{color:#4dd9f0;}
+.launch-text{font-family:'Orbitron',monospace;font-size:20px;letter-spacing:4px;color:#4dd9f0;margin-bottom:28px;text-shadow:0 0 12px rgba(77,217,240,0.5);animation:pulseGlow 2s ease-in-out infinite;}
+.countdown-box{background:linear-gradient(135deg,rgba(88,6,112,0.3),rgba(3,104,128,0.3));border:1px solid var(--lilac);border-radius:18px;padding:28px 20px;margin:0 auto;max-width:320px;box-shadow:0 0 40px rgba(134,79,155,0.3);}
+.countdown-label{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;color:#4dd9f0;margin-bottom:4px;}
+.countdown-label-en{font-family:'Orbitron',monospace;font-size:12px;letter-spacing:4px;color:rgba(77,217,240,0.5);margin-bottom:16px;}
+.countdown-number{font-family:'Orbitron',monospace;font-size:72px;color:var(--code-color);text-shadow:0 0 30px rgba(0,229,255,0.7);letter-spacing:4px;line-height:1;animation:pulseGlow 2s ease-in-out infinite;}
+@keyframes pulseGlow{0%,100%{text-shadow:0 0 20px rgba(0,229,255,0.5)}50%{text-shadow:0 0 50px rgba(0,229,255,1),0 0 100px rgba(0,229,255,0.3)}}
+.confetti-star{position:fixed;pointer-events:none;z-index:100;animation:fall linear forwards;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+#stage5{position:relative;}
 </style>
 </head>
 <body>
+<div class="stars-bg" id="starfield"></div>
 
-<div id="ghost"></div>
-
-<!-- MODAL -->
-<div class="overlay" id="modal">
-  <div class="mbox">
-    <button class="mclose" onclick="closeModal()">✕</button>
-    <h2>🎨 הוראות המשחק</h2>
-    <p>
-      לפנייך 12 סדרות של רביעיות קלפים. כל סדרה מייצגת יצירת אומנות מפורסמת. עלייך להתאים את רביעיות הקלפים ולהשלים את הסדרות. כל סדרה מכילה קלף עם <strong>התמונה</strong> ללא הצבעים שלה, קלף עם <strong>פרטי המידע</strong> על התמונה, קלף עם <strong>פלטה</strong> של חמשת הצבעים העיקריים בתמונה, וקלף עם <strong>חמשת קודי HEX</strong>.<br><br>
-      קודי HEX הם ה-DNA הדיגיטלי של הצבע. משתמשים בהם ב-Canva לבחירה והגדרה של גוון. בקלף קודי ה-HEX מופיעים 5 צבעי הפלטה של התמונה, רק בקודים. כדי לפצח את הקודים — הזיני אותם בתיבת בחירת צבע ב-Canva. לאחר שתגלי את כל חמשת הצבעים, נסי לזהות לאיזה קלף פלטה השילוב מתאים.
-      <div class="tip">💡 <strong>טיפ:</strong> בני ב-Canva כרטיס צבעים לכל קלף HEX כדי שיהיה קל להשוות עם קלפי הפלטה.</div>
-    </p>
+<!-- DATA MODAL (combined: info + codes) -->
+<div class="data-modal-overlay" id="dataModalOverlay" onclick="if(event.target===this)closeDataModal()">
+  <div class="data-modal">
+    <div class="data-modal-title">📡 לוח בקרה: איסוף נתוני משימה</div>
+    <table class="data-table" id="dataTable">
+      <tr>
+        <th>מס'</th><th>שם</th><th>סוג</th><th>מרחק מכדור הארץ</th><th>קוד</th>
+      </tr>
+    </table>
+    <button class="data-close-btn" onclick="closeDataModal()">סגור</button>
   </div>
 </div>
 
-<!-- WIN -->
-<div class="win" id="win">
-  <div class="win-emoji">🏆</div>
-  <h1>מושלם!</h1>
-  <p>כל 12 היצירות זוהו בהצלחה</p>
-  <button class="win-btn" onclick="location.reload()">שחק שוב</button>
+<!-- STAR INFO POPUP -->
+<div class="popup-overlay" id="starPopup">
+  <div class="popup-box">
+    <div class="popup-confirmed" id="pConfirmed">✔ &nbsp;הזיהוי אושר!</div>
+    <div class="popup-name" id="pName"></div>
+    <div class="popup-data-title">נתונים:</div>
+    <div class="popup-data-row"><span class="popup-data-label">סוג:</span><span class="popup-data-val" id="pType"></span></div>
+    <div class="popup-data-row" id="pHebRow"><span class="popup-data-label">שם בעברית:</span><span class="popup-data-val" id="pHeb"></span></div>
+    <div class="popup-data-row"><span class="popup-data-label">מידע:</span><span class="popup-data-val" id="pInfo"></span></div>
+    <div class="popup-data-row" id="pAgeRow"><span class="popup-data-label">גיל משוער:</span><span class="popup-data-val" id="pAge"></span></div>
+    <div class="popup-data-row"><span class="popup-data-label">מרחק מכדוה"א:</span><span class="popup-data-val" id="pDist"></span></div>
+    <hr class="popup-code-sep">
+    <div class="popup-code-label">התקבל קוד:</div>
+    <div class="popup-code" id="pCode"></div>
+    <button class="popup-close-btn" onclick="closePopup()">▸ המשך משימה</button>
+  </div>
 </div>
 
-<!-- HEADER -->
-<div class="hdr">
-  <div class="hdr-right">
-    <div class="progress-pill">
-      הושלמו <span class="num" id="doneN">0</span> / 12
+<div class="header-title">
+  <div class="mission-label">שבוע 4 // סודות החלל</div>
+  <div class="mission-name">המשימה: קוד שיגור 🚀</div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:20%"></div></div>
+
+<div class="container">
+
+<!-- ══ STAGE 1 ══ -->
+<div class="stage active" id="stage1">
+  <div class="briefing" style="margin-top:20px;">
+    <div class="t-stage-header">▸ הודעת מערכת // שלב 01</div>
+    <div class="t-body">
+      מפקדת הכוח יובל וסגנה, ברוכים הבאים למערכת השליטה.<br><br>
+      המשימה שלכם היא לאסוף נתונים מהחלל ולשחזר את <strong>קוד השיגור האבוד</strong> ואת נתוני הניווט של המשימה.<br>
+      קוד השיגור מורכב מקודי הזיהוי של יעדי המשימה.<br><br>
+      עליכם לסנכרן בין מפת הכוכבים האילמת שקיבלתם לבין גרמי השמיים במציאות. בעזרת אפליקציית התצפית, זהו את ששת גרמי השמיים המסומנים במפה ואיספו את הנתונים.
     </div>
-    <button class="btn-how" onclick="openModal()">📖 הוראות</button>
+    <div class="t-note">
+      <span class="t-note-label">שימו לב:</span><br>
+      מספר הכוכב כאן במערכת תואם למספרו על המפה.<br>
+      יש להזין את שמות הכוכבים באנגלית כפי שהם מופיעים באפליקציה.
+    </div>
   </div>
-  <div class="logo">Quatro <em>Art DNA</em></div>
-  <div></div>
+  <div class="section-title">זיהוי גרמי שמיים</div>
+  <div class="stars-grid" id="starsGrid"></div>
+  <div class="t-error" id="err1">יש לאשר את כל שדות הכוכבים לפני המשך</div>
+  <button class="btn" onclick="submitStars()">▸ שדר נתונים למערכת</button>
 </div>
 
-<div class="main-wrap">
-<!-- WAREHOUSE -->
-<div class="warehouse" id="warehouseArea">
-  <div class="wh-label">מחסן הקלפים — גרור קלפים לסדרות</div>
-  <div class="wh-grid" id="whGrid"></div>
+<!-- ══ STAGE 2 ══ -->
+<div class="stage" id="stage2">
+  <button class="data-btn-wide" onclick="openDataModal()">📡 לוח בקרה: איסוף נתוני משימה</button>
+  <div class="briefing">
+    <div class="t-stage-header">▸ הודעת מערכת // שלב 02</div>
+    <div class="t-sys">✓ כל שישה גרמי השמיים זוהו בהצלחה! קודי המשימה נקלטו.</div>
+    <div class="t-body">
+      אחרי השיגור, החללית תזדקק לעצירת ביניים לתחזוקה, לפני הכניסה למסלול והמשך משימתה. במסלול הקרוב לכדור הארץ פועלת תחנת חלל מקומית שתפקידה טיפול ותחזוקה של חלליות. <br>כדי להמשיך לשחזר את נתוני המשימה עליכם <strong>לאתר את תחנת העצירה</strong> לתחזוקת החללית, הנמצאת במיקום הקרוב ביותר לכדור הארץ מבין גרמי השמיים שביעדי המשימה.
+    </div>
+    <div class="t-note">
+      <span class="t-note-label">שימו לב:</span> לוח הבקרה עם נתוני המשימה שנאספו זמין לכם בכפתור למעלה.
+    </div>
+  </div>
+  <div class="t-field-label" style="margin-bottom:10px;">מיקום תחנת החלל</div>
+  <input type="text" class="venus-input" id="venusInput"
+    placeholder="הזינו שם גרם השמיים באנגלית..."
+    onkeydown="if(event.key==='Enter'){event.preventDefault();checkVenus();}"
+    autocomplete="off" autocorrect="off" spellcheck="false">
+  <div class="t-error" id="errVenus">שגיאה! בדקו את תשובתכם שוב.</div>
+  <button class="btn" onclick="checkVenus()">▸ שדר תשובה</button>
 </div>
 
-<!-- SERIES -->
-<div class="series-area">
-  <div class="series-label">סדרות</div>
-  <div class="series-grid" id="seriesGrid"></div>
+<!-- ══ STAGE 3 ══ -->
+<div class="stage" id="stage3">
+  <button class="data-btn-wide" onclick="openDataModal()">📡 לוח בקרה: איסוף נתוני משימה</button>
+  <div class="briefing">
+    <div class="t-stage-header">▸ הודעת מערכת // שלב 03</div>
+    <div class="t-sys">✓ תחנת VENUS מאשרת קליטה!</div>
+    <div class="t-body">
+      מצאתם את מיקום תחנת החלל המקומית בכוכב Venus. כעת העצירה שם מתואמת ומאושרת והחללית תעצור לתחזוקה לפני המשך מסעה.<br><br>
+      <span class="t-stage-header" style="display:inline;font-size:12px;">הודעה מתחנת החלל המקומית ב-Venus:</span><br>
+      התבנית ל<strong>קוד השיגור</strong> האבוד נמצאת אצלנו. יש להשתמש בה בדיוק לצורך בניית רצף השיגור.
+    </div>
+    <div class="code-template-wrap">
+      <div class="code-box"></div><div class="code-box"></div>
+      <div class="code-dot">.</div>
+      <div class="code-box"></div><div class="code-box"></div><div class="code-box"></div><div class="code-box"></div>
+      <div class="code-space"></div>
+      <div class="code-box"></div><div class="code-box"></div>
+      <div class="code-dot">.</div>
+      <div class="code-box"></div><div class="code-box"></div><div class="code-box"></div><div class="code-box"></div>
+    </div>
+    <div class="t-body" style="margin-top:14px;">
+      כדי לבנות את <strong>רצף השיגור</strong> בסדר הנכון, סדרו את גרמי השמיים שזיהיתם לפי מרחקם מכדור הארץ — מהקרוב אל הרחוק, והזינו את הקוד התואם לכל אחד לפי אותו הסדר.
+    </div>
+    <div class="t-note">
+      <span class="t-note-label">הערה:</span><br>
+      יש להתייחס לנקודות ולרווחים.
+    </div>
+  </div>
+  <div class="t-field-label">הזן רצף שיגור</div>
+  <input type="text" class="big-input" id="seqInput"
+    placeholder="XX.XXXX XX.XXXX"
+    onkeydown="if(event.key==='Enter'){event.preventDefault();checkSequence();}"
+    autocomplete="off" autocorrect="off" spellcheck="false" dir="ltr">
+  <div class="t-error" id="err2">רצף לא תקין. בדקו את סדר גרמי השמיים לפי מרחק מכדור הארץ — מהקרוב אל הרחוק.</div>
+  <button class="seq-confirm-btn" onclick="checkSequence()">▸ שדר רצף שיגור</button>
 </div>
-</div><!-- /main-wrap -->
+
+<!-- ══ STAGE 4 ══ -->
+<div class="stage" id="stage4">
+  <div class="briefing" style="margin-top:20px;">
+    <div class="t-stage-header">▸ הודעת מערכת // שלב 04</div>
+    <div class="t-sys" id="seqDisplay" style="direction:rtl;text-align:center;font-size:18px;letter-spacing:2px;display:block;"></div>
+    <div class="t-body">
+      יש לכם כמעט את כל נתוני המשימה. כעת נותר לכם רק לפענח את הקוד ולהבין את <strong>יעד המשימה הסופי</strong>.<br><br>
+      רצף השיגור שגיליתם הוא לא סתם קוד אקראי. יש לו משמעות שמובילה ליעד השיגור. עליכם להבין אותה, למצוא את היעד ולהזין אותו.
+    </div>
+    <div class="t-note">
+      <span class="t-note-label">שימו לב:</span> ניתן להיעזר בגוגל.
+    </div>
+  </div>
+  <div class="section-title">פענוח יעד</div>
+  <input type="text" class="dest-input" id="destInput"
+    placeholder="הזינו את שם היעד..."
+    onkeydown="if(event.key==='Enter'){event.preventDefault();checkDestination();}"
+    autocomplete="off" dir="rtl">
+  <div class="t-error" id="err3">שם היעד לא זוהה. נסו שוב...</div>
+  <button class="dest-confirm-btn" onclick="checkDestination()">▸ אמת יעד</button>
+</div>
+
+<!-- ══ STAGE 5 ══ -->
+<div class="stage" id="stage5" style="position:relative;z-index:10;">
+  <div class="finale" style="position:relative;z-index:10;">
+    <div class="finale-congrats">
+      כל הכבוד, המפקדת יובל וסגנה!<br>
+      בשיתוף פעולה מושלם שחזרתם את כל נתוני המשימה ואת <strong>קוד השיגור</strong> האבוד,<br>
+      ופיצחתם את <strong>היעד המדויק של המשימה</strong> אליה את תשוגרי!
+    </div>
+    <div class="launch-text">✦ &nbsp;הספירה לאחור החלה... &nbsp;✦</div>
+    <div class="countdown-box">
+      <div class="countdown-label">ימים לשיגור</div>
+      <div class="countdown-label-en">DAYS TO LAUNCH</div>
+      <div class="countdown-number" id="daysLeft">—</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
 
 <script>
-const ART = [
-  {id:1,artist:'וינסנט ואן גוך',title:'ליל כוכבים',year:'1889',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art01.jpg',
-   pal:[{c:'#1e3a5f',w:38},{c:'#3d5a8a',w:28},{c:'#1a1a1a',w:18},{c:'#d4c84a',w:10},{c:'#8fb3c9',w:6}],
-   hex:['#d4c84a','#1e3a5f','#8fb3c9','#3d5a8a','#1a1a1a']},
-  {id:2,artist:'סלבדור דאלי',title:'התמדה של זיכרון',year:'1931',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art02.jpg',
-   pal:[{c:'#5c3d1e',w:30},{c:'#0d0608',w:25},{c:'#c9a84c',w:20},{c:'#2d6b8a',w:15},{c:'#96a88a',w:10}],
-   hex:['#96a88a','#5c3d1e','#2d6b8a','#0d0608','#c9a84c']},
-  {id:3,artist:'פיט מונדריאן',title:'קומפוזיציה באדום, כחול וצהוב',year:'1930',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art03.jpg',
-   pal:[{c:'#e8e5e0',w:42},{c:'#d42318',w:24},{c:'#1a1616',w:18},{c:'#0a5a9c',w:10},{c:'#f0c830',w:6}],
-   hex:['#0a5a9c','#d42318','#1a1616','#f0c830','#e8e5e0']},
-  {id:4,artist:'אדוארד מונק',title:'הצעקה',year:'1893',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art04.jpg',
-   pal:[{c:'#c4622a',w:32},{c:'#8a5a3a',w:28},{c:'#e8a030',w:20},{c:'#4a3828',w:12},{c:'#5a7a88',w:8}],
-   hex:['#5a7a88','#4a3828','#e8a030','#c4622a','#8a5a3a']},
-  {id:5,artist:'פבלו פיקאסו',title:'האישה הבוכה',year:'1937',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art05.jpg',
-   pal:[{c:'#c49a18',w:28},{c:'#1a1a18',w:26},{c:'#922a10',w:20},{c:'#3a6060',w:16},{c:'#b8c4d8',w:10}],
-   hex:['#3a6060','#b8c4d8','#922a10','#1a1a18','#c49a18']},
-  {id:6,artist:"ז'ורז' סרה",title:"יום ראשון על גדות לה גראנד ז'אט",year:'1884',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art06.jpg',
-   pal:[{c:'#3a4a3a',w:32},{c:'#8a9a5a',w:26},{c:'#5a6060',w:20},{c:'#bab870',w:14},{c:'#bebcba',w:8}],
-   hex:['#bab870','#5a6060','#3a4a3a','#bebcba','#8a9a5a']},
-  {id:7,artist:'וסילי קנדינסקי',title:'צהוב-אדום-כחול',year:'1925',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art07.jpg',
-   pal:[{c:'#d4a830',w:28},{c:'#7a6870',w:24},{c:'#c0b090',w:20},{c:'#1a1818',w:16},{c:'#1a3a6a',w:12}],
-   hex:['#1a1818','#1a3a6a','#c0b090','#d4a830','#7a6870']},
-  {id:8,artist:'גוסטב קלימט',title:'הנשיקה',year:'1907',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art08.jpg',
-   pal:[{c:'#b89838',w:42},{c:'#7a6828',w:25},{c:'#3a3020',w:18},{c:'#988a78',w:10},{c:'#c8b870',w:5}],
-   hex:['#c8b870','#b89838','#988a78','#3a3020','#7a6828']},
-  {id:9,artist:'רנה מגריט',title:'בנו של אדם',year:'1964',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art09.jpg',
-   pal:[{c:'#9aa89a',w:32},{c:'#c8c4b0',w:26},{c:'#3a3838',w:22},{c:'#181610',w:12},{c:'#5a7a50',w:8}],
-   hex:['#5a7a50','#9aa89a','#c8c4b0','#181610','#3a3838']},
-  {id:10,artist:'אנדי וורהול',title:'מרלין מונרו',year:'1962',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art10.jpg',
-   pal:[{c:'#f04878',w:38},{c:'#d8c460',w:24},{c:'#1e1818',w:20},{c:'#e8b898',w:12},{c:'#a07840',w:6}],
-   hex:['#d8c460','#1e1818','#f04878','#a07840','#e8b898']},
-  {id:11,artist:'קצושיקה הוקוסאי',title:'הגל הגדול בסמוך לקאנאגאווה',year:'1831',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art11.jpg',
-   pal:[{c:'#ede8c8',w:35},{c:'#1e3858',w:30},{c:'#c0bea8',w:18},{c:'#406880',w:12},{c:'#d8c898',w:5}],
-   hex:['#d8c898','#ede8c8','#1e3858','#c0bea8','#406880']},
-  {id:12,artist:'קלוד מונה',title:'בריכת חבצלות המים',year:'1899',
-   img:'https://raw.githubusercontent.com/bettyapanit/Quatro-Art-DNA/main/images/art12.jpg',
-   pal:[{c:'#3a5c40',w:35},{c:'#587060',w:28},{c:'#728050',w:20},{c:'#305038',w:12},{c:'#8a9468',w:5}],
-   hex:['#305038','#3a5c40','#8a9468','#587060','#728050']},
+const STARS_DATA=[
+  {num:1,name:'jupiter', code:'87',dist_ly:'~43 דקות אור', dist_sort:2,type:'כוכב לכת',heb:'צדק',info:'כוכב הלכת החמישי במרחקו מהשמש, והגדול ביותר במערכת השמש. ענק גזים המורכב ברובו ממימן והליום.'},
+  {num:2,name:'alphard', code:'88',dist_ly:'~177 שנות אור',dist_sort:6,type:'כוכב',     age:'420 מיליון שנה',info:'אחד הכוכבים הבהירים בשמי הלילה. ענק כתום, הרדיוס שלו הוא פי 40 מרדיוס השמש.'},
+  {num:3,name:'venus',   code:'48',dist_ly:'~6 דקות אור',  dist_sort:1,type:'כוכב לכת',heb:'כוכב נוגה',info:'הבהיר ביותר בשמיים אחרי הירח. כוכב הלכת השני במרחקו מהשמש. הרכבו דומה להרכב כדור הארץ.'},
+  {num:4,name:'regulus', code:'77',dist_ly:'~79 שנות אור', dist_sort:5,type:'כוכב',     info:'מסתובב על צירו במהירות גבוהה מאוד של כ-317 ק"מ בשנייה, שגורמת לצורתו להיות פחוסה — קוטרו בקו המשווה גדול בכ-30% מקוטרו בקטבים.'},
+  {num:5,name:'procyon', code:'10',dist_ly:'~11.5 שנות אור',dist_sort:3,type:'כוכב',   age:'1.87 מיליארד שנה',info:'אחד הכוכבים הקרובים ביותר למערכת השמש שלנו, מבין הכוכבים שמחוץ למערכת השמש.'},
+  {num:6,name:'capella', code:'02',dist_ly:'~42 שנות אור', dist_sort:4,type:'כוכב',     info:'מערכת של 4 כוכבים: שני ענקים צהובים ושני ננסים אדומים הקשורים כבידתית זה לזה.'},
 ];
+const DEST_PATTERNS=[/disneyland\s*paris/i,/parc\s*disneyland/i,/park\s*disneyland/i,/disneyland\s*park/i,/^disneyland$/i,/^disney\s*paris$/i,/^disney$/i,/euro\s*disney/i,/דיסנילנד\s*פריז/,/דיסנילנד/];
+let starResults={};
 
-function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
+function generateStars(){
+  const sf=document.getElementById('starfield');
+  for(let i=0;i<110;i++){
+    const s=document.createElement('div');s.className='star-dot';
+    const sz=Math.random()*2+0.4;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:${(Math.random()*4).toFixed(1)}s;`;
+    sf.appendChild(s);
+  }
+}
 
-// ── INNER HTML for card types ──
-function imgHTML(art){ return `<div class="c-img"><img src="${art.img}" draggable="false" alt="${art.title}"></div>`; }
-function infoHTML(art){ return `<div class="c-info"><span class="badge">INFO</span><div class="ttl">${art.title}</div><div><div class="art">${art.artist}</div><div class="yr">${art.year}</div></div></div>`; }
-function palHTML(art){ return `<div class="c-pal">${art.pal.map(p=>`<div class="pal-s" style="--w:${p.w};flex:${p.w};background:${p.c}"></div>`).join('')}</div>`; }
-function hexHTML(art){ return `<div class="c-hex"><span class="badge">HEX DNA</span><div class="hex-list">${art.hex.map(x=>`<div class="hc">${x}</div>`).join('')}</div></div>`; }
-function inner(type,art){ return {image:imgHTML,info:infoHTML,pal:palHTML,hex:hexHTML}[type](art); }
-
-// ── STATE ──
-// slots[ws][0..3] = {artId,type,key} | null
-const slots = {};
-let done = 0;
-
-// ── DRAG STATE ──
-let drag = null;
-// drag = {key, artId, type, srcWs, srcSi}
-// srcWs=null means warehouse
-
-const ghost = document.getElementById('ghost');
-
-// ── BUILD ──
-function buildWarehouse(){
-  const g = document.getElementById('whGrid');
-  const all = [];
-  ART.forEach(art=>['image','info','pal','hex'].forEach(t=>all.push({key:`${t}-${art.id}`,type:t,artId:art.id})));
-  shuffle(all).forEach(({key,type,artId})=>{
-    const art = ART.find(a=>a.id===artId);
-    const el = document.createElement('div');
-    el.className='card'; el.id=`wc-${key}`;
-    el.dataset.key=key; el.dataset.type=type; el.dataset.art=artId;
-    el.innerHTML=inner(type,art);
-    el.addEventListener('mousedown',e=>onCardDown(e,el,key,artId,type,null,null));
-    g.appendChild(el);
+function buildStarFields(){
+  const grid=document.getElementById('starsGrid');grid.innerHTML='';
+  STARS_DATA.forEach(star=>{
+    const div=document.createElement('div');div.className='star-field';
+    div.innerHTML=`
+      <div class="star-number"><span class="num">${star.num}</span></div>
+      <div class="star-input-wrap">
+        <input type="text" class="star-input" id="star${star.num}" autocomplete="off" autocorrect="off" spellcheck="false"
+          onkeydown="if(event.key==='Enter'){event.preventDefault();validateStar(${star.num});}">
+        <button class="confirm-btn" onclick="validateStar(${star.num})" type="button">אישור</button>
+      </div>
+      <div class="star-feedback" id="fb${star.num}"></div>`;
+    grid.appendChild(div);
   });
 }
 
-function buildSeries(){
-  const sc = document.getElementById('seriesGrid');
-  for(let w=1;w<=12;w++){
-    slots[w]=[null,null,null,null];
-    const box=document.createElement('div');
-    box.className='ws'; box.dataset.w=w;
-    box.style.cssText='display:flex;flex-direction:row;gap:3px;padding:4px;align-items:center;justify-content:center;min-width:0;overflow:hidden;';
-    const num=document.createElement('div');
-    num.className='ws-num'; num.textContent=w; box.appendChild(num);
-    for(let s=0;s<4;s++){
-      const sl=document.createElement('div');
-      sl.className='slot'; sl.dataset.w=w; sl.dataset.s=s;
-      // slot sized by CSS vars
-      box.appendChild(sl);
-    }
-    sc.appendChild(box);
-  }
+function buildDataTable(showCodes){
+  const tbody=document.getElementById('dataTable');
+  // keep header row, rebuild data rows
+  while(tbody.rows.length>1) tbody.deleteRow(1);
+  STARS_DATA.forEach(star=>{
+    const tr=tbody.insertRow();
+    tr.innerHTML=`<td>${star.num}</td><td style="font-family:'Share Tech Mono',monospace;font-weight:700;">${star.name.toUpperCase()}</td><td>${star.type}</td><td>${star.dist_ly.replace('~','כ-')}</td><td class="code-cell">${showCodes?(starResults[star.num]?.code||'—'):'—'}</td>`;
+  });
 }
 
-// ── DRAG LOGIC (pointer-based, clean) ──
-function onCardDown(e,el,key,artId,type,srcWs,srcSi){
-  e.preventDefault(); e.stopPropagation();
-  drag={key,artId,type,srcWs,srcSi,el};
-
-  // show ghost
-  const art=ART.find(a=>a.id===artId);
-  ghost.innerHTML=inner(type,art);
-  ghost.style.display='block';
-  posGhost(e);
-
-  el.classList.add('dragging');
-
-  document.addEventListener('mousemove',onMove);
-  document.addEventListener('mouseup',onUp);
+function openDataModal(){
+  buildDataTable(true);
+  document.getElementById('dataModalOverlay').classList.add('open');
 }
+function closeDataModal(){document.getElementById('dataModalOverlay').classList.remove('open');}
 
-function posGhost(e){
-  ghost.style.left=(e.clientX-54)+'px';
-  ghost.style.top=(e.clientY-75)+'px';
+function showPopup(star){
+  document.getElementById('pName').textContent=star.name.toUpperCase();
+  document.getElementById('pType').textContent=star.type;
+  document.getElementById('pInfo').textContent=star.info;
+  document.getElementById('pDist').textContent=star.dist_ly.replace('~','כ-');
+  document.getElementById('pCode').textContent=star.code;
+  // Hebrew name row
+  const hebRow=document.getElementById('pHebRow');
+  if(star.heb){hebRow.style.display='flex';document.getElementById('pHeb').textContent=star.heb;}
+  else hebRow.style.display='none';
+  // Age row
+  const ageRow=document.getElementById('pAgeRow');
+  if(star.age){ageRow.style.display='flex';document.getElementById('pAge').textContent='כ-'+star.age;}
+  else ageRow.style.display='none';
+  document.getElementById('starPopup').classList.add('open');
 }
+function closePopup(){document.getElementById('starPopup').classList.remove('open');}
 
-function onMove(e){
-  posGhost(e);
-  // highlight slots under cursor
-  document.querySelectorAll('.slot.over').forEach(s=>s.classList.remove('over'));
-  const el=document.elementFromPoint(e.clientX,e.clientY);
-  const sl=el?.closest('.slot');
-  if(sl) sl.classList.add('over');
-}
-
-function onUp(e){
-  document.removeEventListener('mousemove',onMove);
-  document.removeEventListener('mouseup',onUp);
-  ghost.style.display='none';
-  document.querySelectorAll('.slot.over').forEach(s=>s.classList.remove('over'));
-  if(drag) drag.el.classList.remove('dragging');
-
-  // find drop target
-  const el=document.elementFromPoint(e.clientX,e.clientY);
-  const slotEl=el?.closest('.slot');
-
-  if(slotEl){
-    const w=+slotEl.dataset.w, s=+slotEl.dataset.s;
-    dropOnSlot(w,s);
+function validateStar(num){
+  const input=document.getElementById('star'+num);
+  const fb=document.getElementById('fb'+num);
+  const val=input.value.trim().toLowerCase();
+  const star=STARS_DATA.find(s=>s.num===num);
+  if(!val){fb.className='star-feedback';fb.innerHTML='';return;}
+  if(val===star.name){
+    input.className='star-input success';
+    fb.className='star-feedback success';
+    fb.innerHTML='✓ זוהה! קוד: <span class="star-code-inline">'+star.code+'</span>';
+    starResults[num]={name:input.value.trim(),code:star.code,valid:true};
+    setTimeout(()=>showPopup(star),300);
   } else {
-    // check if dropped on warehouse area - return card
-    const wh=document.getElementById('warehouseArea');
-    const rect=wh.getBoundingClientRect();
-    if(e.clientY<=rect.bottom && drag && drag.srcWs!==null){
-      returnToWarehouse();
+    input.className='star-input error';
+    fb.className='star-feedback error';
+    fb.innerHTML='✕ שם לא זוהה – בדקו איות באנגלית';
+    delete starResults[num];
+  }
+  document.getElementById('err1').style.display='none';
+}
+
+function submitStars(){
+  if(!STARS_DATA.every(s=>starResults[s.num]?.valid)){
+    document.getElementById('err1').style.display='block';return;
+  }
+  goToStage(2);
+}
+
+function checkVenus(){
+  const val=document.getElementById('venusInput').value.trim().toLowerCase();
+  if(val==='venus'){
+    document.getElementById('venusInput').className='venus-input success';
+    document.getElementById('errVenus').style.display='none';
+    goToStage(3);
+  } else {
+    document.getElementById('venusInput').className='venus-input error';
+    document.getElementById('errVenus').style.display='block';
+  }
+}
+
+function checkSequence(){
+  const val=document.getElementById('seqInput').value.trim();
+  const input=document.getElementById('seqInput');
+  const norm=val.replace(/,/g,' ').replace(/\s+/g,' ').trim();
+  if(norm==='48.8710 02.7788'){
+    input.className='big-input success';
+    document.getElementById('err2').style.display='none';
+    setTimeout(()=>{
+      const d=document.getElementById('seqDisplay');
+      if(d){d.innerHTML='✓ רצף השיגור אומת!<br><span style="direction:ltr;unicode-bidi:bidi-override;display:inline-block;font-size:22px;letter-spacing:3px;margin-top:6px;">48.8710 02.7788</span>';}
+      goToStage(4);
+    },700);
+  } else {
+    document.getElementById('err2').style.display='block';
+  }
+}
+
+function checkDestination(){
+  const val=document.getElementById('destInput').value.trim();
+  if(DEST_PATTERNS.some(p=>p.test(val))){
+    document.getElementById('destInput').className='dest-input success';
+    document.getElementById('err3').style.display='none';
+    setTimeout(()=>{launchFinale();goToStage(5);},800);
+  } else {
+    document.getElementById('err3').style.display='block';
+  }
+}
+
+function goToStage(n){
+  document.querySelectorAll('.stage').forEach(s=>s.classList.remove('active'));
+  document.getElementById('stage'+n).classList.add('active');
+  const pct={1:20,2:40,3:60,4:80,5:100}[n]||20;
+  document.getElementById('progress').style.width=pct+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function launchFinale(){
+  document.getElementById('starfield').style.display='none';
+  document.body.style.background='#03020a';
+  // Create canvas directly on body for true full-screen
+  const cv=document.createElement('canvas');
+  cv.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0;transition:opacity 1s;';
+  document.body.appendChild(cv);
+  const ctx=cv.getContext('2d');
+  function resize(){
+    cv.width=window.innerWidth;
+    cv.height=window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const SPEED=8;
+  const NUM=450;
+  let W=cv.width, H=cv.height;
+  const stars=Array.from({length:NUM},()=>({
+    x:(Math.random()-0.5)*W*4,
+    y:(Math.random()-0.5)*H*4,
+    z:Math.random()*W
+  }));
+  let lastT=null;
+  function draw(ts){
+    W=cv.width; H=cv.height;
+    if(!lastT) lastT=ts;
+    const raw=(ts-lastT)/16.67;
+    lastT=ts;
+    const dt=(raw<0.1||raw>5)?1:raw;
+    const cx=W/2, cy=H/2;
+    ctx.fillStyle='rgba(3,2,10,0.22)';
+    ctx.fillRect(0,0,W,H);
+    for(let i=0;i<stars.length;i++){
+      const s=stars[i];
+      const pz=s.z;
+      s.z-=SPEED*dt;
+      if(s.z<=0){
+        s.x=(Math.random()-0.5)*W*4;
+        s.y=(Math.random()-0.5)*H*4;
+        s.z=W; continue;
+      }
+      const sx=(s.x/s.z)*W+cx, sy=(s.y/s.z)*H+cy;
+      const px=(s.x/pz)*W+cx,  py=(s.y/pz)*H+cy;
+      if(sx<-30||sx>W+30||sy<-30||sy>H+30) continue;
+      const t=1-s.z/W;
+      ctx.strokeStyle=`rgba(${160+Math.floor(t*90)},${200+Math.floor(t*55)},255,${0.35+t*0.6})`;
+      ctx.lineWidth=Math.max(0.5,t*3);
+      ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(sx,sy); ctx.stroke();
     }
-    // else: no valid drop, card stays (if from warehouse) or returns to slot
-    if(drag && drag.srcWs!==null){
-      // restore to original slot
-      restoreToSlot();
-    }
+    requestAnimationFrame(draw);
   }
-  drag=null;
-}
-
-function dropOnSlot(w,s){
-  if(!drag) return;
-  const {key,artId,type,srcWs,srcSi}=drag;
-
-  // vacate source
-  if(srcWs!==null){
-    slots[srcWs][srcSi]=null;
-    const oldSlot=getSlot(srcWs,srcSi);
-    if(oldSlot){oldSlot.innerHTML='';oldSlot.classList.remove('has');}
-    updateGS(srcWs); uncheckWS(srcWs);
-  }
-
-  // eject existing from target slot
-  if(slots[w][s]!==null){
-    const ev=slots[w][s];
-    slots[w][s]=null;
-    const wcard=document.getElementById(`wc-${ev.key}`);
-    if(wcard) wcard.classList.remove('gone');
-  }
-
-  // place
-  slots[w][s]={key,artId,type};
-  const wcard=document.getElementById(`wc-${key}`);
-  if(wcard) wcard.classList.add('gone');
-  renderSlot(w,s,artId,type,key);
-  updateGS(w); checkWS(w);
-}
-
-function returnToWarehouse(){
-  if(!drag||drag.srcWs===null) return;
-  const {key,srcWs,srcSi}=drag;
-  slots[srcWs][srcSi]=null;
-  const sl=getSlot(srcWs,srcSi);
-  if(sl){sl.innerHTML='';sl.classList.remove('has');}
-  const wcard=document.getElementById(`wc-${key}`);
-  if(wcard) wcard.classList.remove('gone');
-  updateGS(srcWs); uncheckWS(srcWs);
-}
-
-function restoreToSlot(){
-  // card was from warehouse, just leave it hidden (it was gone already)
-  // Actually if srcWs is null it was from warehouse, card is .gone - no restore needed
-  // If srcWs !== null, we already handled in onUp
-}
-
-function getSlot(w,s){
-  const box=document.querySelector(`.ws[data-w="${w}"]`);
-  if(!box) return null;
-  return box.querySelectorAll('.slot')[s]||null;
-}
-
-function renderSlot(w,s,artId,type,key){
-  const sl=getSlot(w,s); if(!sl) return;
-  const art=ART.find(a=>a.id===artId);
-  sl.innerHTML=inner(type,art);
-  sl.classList.add('has');
-
-  // make slot draggable
-  sl.onmousedown=e=>{
-    e.preventDefault(); e.stopPropagation();
-    const d=slots[w][s]; if(!d) return;
-    // create a temporary element for the drag source reference
-    const fakeEl=document.createElement('div');
-    fakeEl.classList.add('card','dragging');
-    onCardDown(e,fakeEl,d.key,d.artId,d.type,w,s);
-    // immediately vacate
-    slots[w][s]=null;
-    sl.innerHTML=''; sl.classList.remove('has');
-    updateGS(w); uncheckWS(w);
-  };
-}
-
-// ── GRAYSCALE ──
-function updateGS(w){
-  let imgArt=null;
-  for(let s=0;s<4;s++){
-    const d=slots[w][s];
-    if(d&&d.type==='image'){imgArt=d.artId;break;}
-  }
-  const img=document.querySelector(`.ws[data-w="${w}"] .slot img`);
-  if(!img) return;
-  if(!imgArt){img.style.filter='grayscale(100%)';return;}
-  let c=0;
-  for(let s=0;s<4;s++){
-    const d=slots[w][s];
-    if(d&&d.type!=='image'&&d.artId===imgArt) c++;
-  }
-  img.style.filter=`grayscale(${[100,85,70,0][c]}%)`;
-}
-
-// ── COMPLETION ──
-function checkWS(w){
-  const s=slots[w];
-  if(s.some(x=>x===null)) return;
-  const ids=new Set(s.map(x=>x.artId));
-  if(ids.size!==1) return;
-  const box=document.querySelector(`.ws[data-w="${w}"]`);
-  if(box&&!box.classList.contains('complete')){
-    box.classList.add('complete');
-    done++;
-    document.getElementById('doneN').textContent=done;
-    playChord();
-    if(done===12) setTimeout(()=>document.getElementById('win').classList.add('on'),900);
-  }
-}
-function uncheckWS(w){
-  const box=document.querySelector(`.ws[data-w="${w}"]`);
-  if(box&&box.classList.contains('complete')){
-    box.classList.remove('complete');
-    done=Math.max(0,done-1);
-    document.getElementById('doneN').textContent=done;
+  setTimeout(()=>{ cv.style.opacity='1'; requestAnimationFrame(draw); }, 200);
+  // countdown
+  const diff=Math.ceil((new Date('2026-07-03')-new Date())/86400000);
+  document.getElementById('daysLeft').textContent=diff>0?diff:'0';
+  // confetti
+  const emojis=['✦','★','✧','⭐','🌟','✨','💫'];
+  for(let i=0;i<55;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');el.className='confetti-star';
+      el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.cssText=`left:${Math.random()*100}%;top:-30px;animation-duration:${(Math.random()*3+2).toFixed(1)}s;font-size:${Math.random()*16+10}px;color:hsl(${Math.random()*60+180},80%,70%);`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),6000);
+    },i*75);
   }
 }
 
-function playChord(){
-  try{
-    const C=new(window.AudioContext||window.webkitAudioContext)();
-    [523,659,784,1047].forEach((f,i)=>{
-      const o=C.createOscillator(),g=C.createGain();
-      o.connect(g);g.connect(C.destination);
-      o.type='sine';o.frequency.value=f;
-      g.gain.setValueAtTime(0.13,C.currentTime+i*0.1);
-      g.gain.exponentialRampToValueAtTime(0.001,C.currentTime+i*0.1+0.5);
-      o.start(C.currentTime+i*0.1);o.stop(C.currentTime+i*0.1+0.6);
-    });
-  }catch(e){}
-}
-
-function openModal(){document.getElementById('modal').classList.add('on');}
-function closeModal(){document.getElementById('modal').classList.remove('on');}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
-
-buildWarehouse();
-buildSeries();
+document.addEventListener('DOMContentLoaded',()=>{generateStars();buildStarFields();});
 </script>
 </body>
 </html>
